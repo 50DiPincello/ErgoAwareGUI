@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
 
         #Set window icon -> this would not appear on the app main window because I removed the title bar
         #self.setWindowIcon(QtGui.QIcon(":/icons/icons/anchor.svg"))
-        self.setWindowIcon(QtGui.QIcon("/home/gui/Desktop/Tese/Treinos/Training3/ea.ico"))
+        self.setWindowIcon(QtGui.QIcon("ea.ico"))
 
         #Set window title
         self.setWindowTitle("MODERN UI")
@@ -79,7 +79,45 @@ class MainWindow(QMainWindow):
         #Button to ergoaware site
         self.ui.site_button.clicked.connect(lambda: self.goToSite())
 
+        #Navigate to home page
+        self.ui.ergoaware_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.home))
+        self.ui.ergoaware_logo_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.home))
+
+        #Navigate to calibration page
+        self.ui.calibration_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.calibration))
+
+        #Navigate to launch page
+        self.ui.launch_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.launch))
+
+        #Navigate to analyze page
+        self.ui.analyze_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.analyze))
+
+        #Navigate to installation page
+        self.ui.installation_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.installation))
+
+        #Navigate to help page
+        self.ui.help_button.clicked.connect(lambda: self.ui.pages.setCurrentWidget(self.ui.help))
+
+        #Select all packages
+        self.ui.select_all_button.clicked.connect(lambda: self.selectAll())
+
+        #Unselect all packages
+        self.ui.unselect_all_button.clicked.connect(lambda: self.unSelectAll())
+
         self.show()
+
+
+    #Select all packages
+    def selectAll(self):
+        for i in range(self.ui.packages_list.count()):
+            item = self.ui.packages_list.item(i)
+            item.setCheckState(QtCore.Qt.Checked)
+
+    #Unselect all packages
+    def unSelectAll(self):
+        for i in range(self.ui.packages_list.count()):
+            item = self.ui.packages_list.item(i)
+            item.setCheckState(QtCore.Qt.Unchecked)
     
     #Site Ergoaware
     def goToSite(self):
@@ -99,7 +137,7 @@ class MainWindow(QMainWindow):
         else:
             #restore menu
             newWidth = 0
-            self.ui.open_close_side_bar_btn.setIcon(QtGui.QIcon(":/icons/icons/align-left.svg"))
+            self.ui.open_close_side_bar_btn.setIcon(QtGui.QIcon(":/icons/icons/menu.svg"))
         
         #animate the transition
         self.animation = QPropertyAnimation(self.ui.side_menu_container, b"maximumWidth") #Animate minimumWidth
